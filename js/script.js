@@ -129,3 +129,17 @@ document.addEventListener('keydown', function (e) {
 });
 // Запускаем игру
 requestAnimationFrame(loop);
+
+
+
+let span = document.querySelector('h1 span');
+let input1 = document.querySelector('input');
+let bg = document.querySelector('bg');
+
+input1.addEventListener('keyup', function (e) {
+    if (e.code === 'Enter') {
+        span.innerHTML = input1.value
+    }
+
+    
+})
