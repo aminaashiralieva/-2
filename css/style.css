@@ -1,0 +1,33 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/*Задаём глобальные параметры*/
+body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:'Courier New', Courier, monospace;
+}
+
+/*Делаем границу вокруг игрового поля*/
+canvas {
+    border: 1px solid white;
+}
+
+.modal {
+    position: fixed;
+    width: max;
+    height: max;
+    z-index: 20;
+    color: white;
+}
+
+.bg {
+    position: fixed;
+    inset: 0;
+    background-color: black;
+}
