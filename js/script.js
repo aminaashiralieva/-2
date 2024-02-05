@@ -5,6 +5,18 @@ let context = canvas.getContext('2d');
 let grid = 16;
 // Служебная переменная, которая отвечает за скорость змейки
 let count = 0;
+// Количество очков
+let scores = 0
+let scoresHTML = document.querySelector('.score')
+
+let refresh = document.querySelector('.refresh')
+let isRefresh = false
+
+refresh.addEventListener('click', (e) => {
+    isRefresh = true
+    console.log(isRefresh)
+})
+
 // А вот и сама змейка
 let snake = {
     // Начальные координаты
@@ -75,7 +87,11 @@ function loop() {
         // Если змейка добралась до яблока...
         if (cell.x === apple.x && cell.y === apple.y) {
             // увеличиваем длину змейки
+            scores += 1
+            scoresHTML.innerHTML = scores
             snake.maxCells++;
+            console.log(snake.maxCells)
+
             // Рисуем новое яблочко
             // Помним, что размер холста у нас 400x400, при этом он разбит на ячейки — 25 в каждую сторону
             apple.x = getRandomInt(0, 25) * grid;
@@ -85,7 +101,7 @@ function loop() {
         // Для этого перебираем весь массив и смотрим, есть ли у нас в массиве змейки две клетки с одинаковыми координатами 
         for (let i = index + 1; i < snake.cells.length; i++) {
             // Если такие клетки есть — начинаем игру заново
-            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+            if ((cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) || isRefresh) {
                 // Задаём стартовые параметры основным переменным
                 snake.x = 160;
                 snake.y = 160;
@@ -93,6 +109,10 @@ function loop() {
                 snake.maxCells = 4;
                 snake.dx = grid;
                 snake.dy = 0;
+                scores = 0
+                scoresHTML.innerHTML = scores
+                isRefresh = false
+
                 // Ставим яблочко в случайное место
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
@@ -132,14 +152,29 @@ requestAnimationFrame(loop);
 
 
 
+let modal = document.querySelector('.modal');
 let span = document.querySelector('h1 span');
 let input1 = document.querySelector('input');
-let bg = document.querySelector('bg');
+let bg = document.querySelector('.bg');
+let svg = document.querySelector('.cross');
+let title = document.querySelector('.title');
 
 input1.addEventListener('keyup', function (e) {
     if (e.code === 'Enter') {
         span.innerHTML = input1.value
+        svg.style.display = 'block'
     }
-
-    
 })
+
+svg.addEventListener('click', (e) => {
+    console.log(modal)
+    modal.style.display = 'none'
+    bg.style.display = 'none'
+    title.innerHTML = input1.value
+})
+
+
+
+function timeBg() {
+    setTimeout();
+}
